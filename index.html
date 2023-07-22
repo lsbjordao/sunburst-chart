@@ -6,9 +6,10 @@
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
   <script src="https://code.highcharts.com/modules/sunburst.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
 <body>
-  <div id="container"></div>
+  <div id="container" style="height: 100vh;"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -176,8 +177,17 @@
       Highcharts.chart('container', {
         chart: {
           type: 'sunburst',
-          height: '100%',
+          height: '50%',
           backgroundColor: '#3a3a3a'
+        },
+        exporting: {
+          enabled: true, // Habilita o botão de exportação
+          chartOptions: {
+            chart: {
+              height: 800, // Defina a altura da imagem exportada aqui
+              width: 800   // Defina a largura da imagem exportada aqui
+            }
+          }
         },
         series: [
           {
@@ -186,9 +196,9 @@
             allowDrillToNode: true,
             cursor: 'pointer',
             dataLabels: {
-              style: {
-                fontSize: '20px' // Tamanho da fonte
-              },
+              // style: {
+              //   fontSize: '10px' // Tamanho da fonte
+              // },
               format: '{point.name}',
               filter: {
                 property: 'innerArcLength',
@@ -202,7 +212,7 @@
                 levelIsConstant: false,
                 dataLabels: {
                   style: {
-                    fontSize: '24px' // Tamanho da fonte
+                    fontSize: '18px' // Tamanho da fonte
                   },
                   filter: {
                     property: 'outerArcLength',
@@ -216,7 +226,7 @@
                 colorByPoint: true,
                 dataLabels: {
                   style: {
-                    fontSize: '22px' // Tamanho da fonte
+                    fontSize: '16px' // Tamanho da fonte
                   }
                 }
               },
@@ -225,6 +235,11 @@
                 colorVariation: {
                   key: 'brightness',
                   to: -0.5
+                },
+                dataLabels: {
+                  style: {
+                    fontSize: '15px' // Tamanho da fonte
+                  }
                 }
               },
               {
@@ -232,6 +247,23 @@
                 colorVariation: {
                   key: 'brightness',
                   to: 0.5
+                },
+                dataLabels: {
+                  style: {
+                    fontSize: '14px' // Tamanho da fonte
+                  }
+                }
+              },
+              {
+                level: 5,
+                colorVariation: {
+                  key: 'brightness',
+                  to: 0.5
+                },
+                dataLabels: {
+                  style: {
+                    fontSize: '16px' // Tamanho da fonte
+                  }
                 }
               }
             ]
