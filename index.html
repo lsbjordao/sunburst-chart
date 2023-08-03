@@ -8,6 +8,27 @@
   <script src="https://code.highcharts.com/modules/sunburst.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
+
+<style>
+  /* Quebra de linha nos rótulos */
+  .highcharts-data-labels text tspan {
+    white-space: pre-line;
+  }
+
+  /* Força todas as fontes a ficarem brancas */
+  .highcharts-title,
+  .highcharts-subtitle,
+  .highcharts-data-labels text,
+  .highcharts-xaxis-labels text,
+  .highcharts-yaxis-labels text,
+  .highcharts-credits,
+  .highcharts-contextbutton text,
+  .highcharts-legend-title {
+    fill: #ffffff !important;
+    color: green !important;
+  }
+</style>
+
 <body>
   <div id="container" style="height: 100vh;"></div>
 
@@ -199,7 +220,7 @@
               // style: {
               //   fontSize: '10px' // Tamanho da fonte
               // },
-              format: '{point.name}',
+              format: '{point.name}: {point.value}',
               filter: {
                 property: 'innerArcLength',
                 operator: '>',
@@ -212,7 +233,7 @@
                 levelIsConstant: false,
                 dataLabels: {
                   style: {
-                    fontSize: '18px' // Tamanho da fonte
+                    fontSize: '16px' // Tamanho da fonte
                   },
                   filter: {
                     property: 'outerArcLength',
@@ -250,7 +271,7 @@
                 },
                 dataLabels: {
                   style: {
-                    fontSize: '14px' // Tamanho da fonte
+                    fontSize: '12px' // Tamanho da fonte
                   }
                 }
               },
@@ -262,7 +283,7 @@
                 },
                 dataLabels: {
                   style: {
-                    fontSize: '16px' // Tamanho da fonte
+                    fontSize: '11px' // Tamanho da fonte
                   }
                 }
               }

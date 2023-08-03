@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gráfico Sunburst com Highcharts</title>
+  <!-- Inclua os arquivos das bibliotecas Highcharts e Highcharts Sunburst -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://code.highcharts.com/modules/sunburst.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/themes/high-contrast-dark.js"></script>
+</head>
+<body>
+  <div id="container" style="height: 100vh;"></div>
+
+  <style>
+    /* Quebra de linha nos rótulos */
+    .highcharts-data-labels text tspan {
+      white-space: pre-line;
+    }
+
+    /* Força todas as fontes a ficarem brancas */
+    .highcharts-title,
+    .highcharts-subtitle,
+    .highcharts-data-labels text,
+    .highcharts-xaxis-labels text,
+    .highcharts-yaxis-labels text,
+    .highcharts-credits,
+    .highcharts-contextbutton text,
+    .highcharts-legend-title {
+      fill: #ffffff !important;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Dados fornecidos
+      var data = [
+        {
+          id: 'Brazil',
+          parent: '',
+          name: 'Brazil',
+          value: 224
+        },
+        {
+          id: 'Brazil-endemic',
+          parent: 'Brazil',
+          name: 'endemic',
+          value: 18
+        },
+        {
+          id: 'Brazil-endemic2',
+          parent: 'Brazil',
+          name: 'mostBrazilianGenera',
+          value: 33
+        },
+        {
+          id: 'World',
+          parent: '',
+          name: 'World',
+          value: 778
+        }
+      ];
+
+      // Cálculo do valor total do nível principal (Brazil)
+      var totalBrazil = data.find(item => item.id === 'Brazil').value;
+
+      // Função para calcular a porcentagem
+      function calculatePercentage(value) {
+        return ((value / totalBrazil) * 100).toFixed(2);
+      }
+
+      // Configuração do gráfico Sunburst
+      Highcharts.chart('container', {
+        chart: {
+          type: 'sunburst',
+          height: '50%',
+          backgroundColor: '#3a3a3a'
+        },
+        exporting: {
+          enabled: true, // Habilita o botão de exportação
+          chartOptions: {
+            chart: {
+              height: 900, // Defina a altura da imagem exportada aqui
+              width: 900   // Defina a largura da imagem exportada aqui
+            }
+          }
+        },
+        series: [
+          {
+            type: 'sunburst',
+            data: data,
+            allowDrillToNode: true,
+            cursor: 'pointer',
+            dataLabels: {
+              format: '{point.name}: {point.value}',
+              filter: {
+                property: 'innerArcLength',
+                operator: '>',
+                value: 16
+              }
+            },
+            levels: [
+              {
+                level: 1,
+                levelIsConstant: false,
+                dataLabels: {
+                  style: {
+                    fontSize: '18px' // Tamanho da fonte
+                  },
+                  filter: {
+                    property: 'outerArcLength',
+                    operator: '>',
+                    value: 64
+                  }
+                }
+              },
+              {
+                level: 2,
+                colorByPoint: true,
+                dataLabels: {
+                  style: {
+                    fontSize: '16px' // Tamanho da fonte
+                  }
+                }
+              },
+              {
+                level: 3,
+                colorVariation: {
+                  key: 'brightness',
+                  to: -0.5
+                },
+                dataLabels: {
+                  style: {
+                    fontSize: '15px' // Tamanho da fonte
+                  }
+                }
+              },
+              {
+                level: 4,
+                colorVariation: {
+                  key: 'brightness',
+                  to: 0.5
+                },
+                dataLabels: {
+                  style: {
+                    fontSize: '14px' // Tamanho da fonte
+                  }
+                }
+              },
+              {
+                level: 5,
+                colorVariation: {
+                  key: 'brightness',
+                  to: 0.5
+                },
+                dataLabels: {
+                  style: {
+                    fontSize: '16px' // Tamanho da fonte
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        title: {
+          text: 'Sunburst with Highcharts'
+        }
+      });
+    });
+  </script>
+</body
