@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Gráfico Sunburst com Highcharts</title>
+  <!-- Inclua os arquivos das bibliotecas Highcharts e Highcharts Sunburst -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://code.highcharts.com/modules/sunburst.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+
+<style>
+  /* Quebra de linha nos rótulos */
+  .highcharts-data-labels text tspan {
+    white-space: pre-line;
+  }
+
+  /* Força todas as fontes a ficarem brancas */
+  .highcharts-data-label {
+    fill: #ffffff !important;
+  }
+
+  .highcharts-data-label {
+    fill: #ffffff !important;
+    text-align: center !important;
+  }
+</style>
+
+
+<body>
+  <div id="container" style="height: 100vh;"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Dados fornecidos
+      var data = [
+        {
+          id: 'dataMesh',
+          parent: '',
+          name: 'Data Mesh',
+          value: 1,
+          color: 'white',
+          dataLabels: {
+            style: {
+              color: 'black'
+            }
+          }
+        },
+        {
+          id: 'dataMesh-dataProduct',
+          parent: 'dataMesh',
+          name: 'Data as a Product',
+          value: 1,
+          color: 'lightgreen',
+          dataLabels: {
+            style: {
+              color: 'black'
+            }
+          }
+        },
+        {
+          id: 'dataMesh-federalGovern',
+          parent: 'dataMesh',
+          name: 'Governança de<br>dados federada',
+          value: 1,
+          color: 'yellow',
+          dataLabels: {
+            style: {
+              color: 'black'
+            }
+          }
+        },
+        {
+          id: 'dataMesh-selfService',
+          parent: 'dataMesh',
+          name: 'Infraestrutura de<br>autoatendimento',
+          value: 1,
+          color: 'coral',
+          dataLabels: {
+            style: {
+              color: 'black'
+            }
+          }
+        },
+        {
+          id: 'dataMesh-domain',
+          parent: 'dataMesh',
+          name: 'Arquitetura distribuída<br>&nbsp;&nbsp;&nbsp;orientada à domínio',
+          value: 1,
+          color: 'lightblue',
+          dataLabels: {
+            style: {
+              color: 'black'
+            }
+          }
+        }
+      ];
+
+      // Configuração do gráfico Sunburst
+      Highcharts.chart('container', {
+        chart: {
+          type: 'sunburst',
+          height: '50%'
+        },
+        series: [
+          {
+            type: 'sunburst',
+            data: data,
+            borderRadius: 22,
+            dataLabels: {
+              rotation: 0
+            },
+            levels: [
+              {
+                level: 1,
+                levelIsConstant: false,
+                levelSize: {
+                  unit: 'weight',
+                  value: 0.5
+                },
+                dataLabels: {
+                  style: {
+                    fontSize: '60px' // Tamanho da fonte
+                  }
+                }
+              },
+              {
+                level: 2,
+                colorByPoint: true,
+                dataLabels: {
+                  style: {
+                    fontSize: '30px'
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        title: {
+          text: ''
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

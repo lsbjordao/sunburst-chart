@@ -7,30 +7,9 @@
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
   <script src="https://code.highcharts.com/modules/sunburst.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
-  <script src="https://code.highcharts.com/themes/high-contrast-dark.js"></script>
 </head>
 <body>
   <div id="container" style="height: 100vh;"></div>
-
-  <style>
-    /* Quebra de linha nos rótulos */
-    .highcharts-data-labels text tspan {
-      white-space: pre-line;
-    }
-
-    /* Força todas as fontes a ficarem brancas */
-    .highcharts-title,
-    .highcharts-subtitle,
-    .highcharts-data-labels text,
-    .highcharts-xaxis-labels text,
-    .highcharts-yaxis-labels text,
-    .highcharts-credits,
-    .highcharts-contextbutton text,
-    .highcharts-legend-title {
-      fill: #ffffff !important;
-    }
-  </style>
-
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       // Dados fornecidos

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Gráfico Sunburst com Highcharts</title>
+  <!-- Inclua os arquivos das bibliotecas Highcharts e Highcharts Sunburst -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://code.highcharts.com/modules/sunburst.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+
+<style>
+  /* Quebra de linha nos rótulos */
+  .highcharts-data-labels text tspan {
+    white-space: pre-line;
+  }
+
+  /* Força todas as fontes a ficarem brancas */
+  .highcharts-data-label {
+    fill: #ffffff !important;
+  }
+</style>
+
+
+<body>
+  <div id="container" style="height: 100vh;"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Dados fornecidos
+      var data = [
+        {
+          id: 'dataGovernance',
+          parent: '',
+          name: 'Governança<br>de dados',
+          value: 1,
+          color: 'white',
+          dataLabels: {
+            style: {
+              color: 'black'
+            }
+          }
+        },
+        {
+          id: 'dataGovernance-technical',
+          parent: 'dataGovernance',
+          name: 'Técnico',
+          value: 1,
+          color: '#8C7775',
+          dataLabels: {
+            style: {
+              color: 'white'
+            }
+          }
+        },
+        {
+          id: 'dataGovernance-business',
+          parent: 'dataGovernance',
+          name: 'Negócio',
+          value: 1,
+          color: '#B39A91',
+          dataLabels: {
+            style: {
+              color: 'white'
+            }
+          }
+        },
+        {
+          id: 'dataGovernance-security',
+          parent: 'dataGovernance',
+          name: 'Segurança',
+          value: 1,
+          color: '#B39A91',
+          dataLabels: {
+            style: {
+              color: 'white'
+            }
+          }
+        },
+        {
+          id: 'dataGovernance-legal',
+          parent: 'dataGovernance',
+          name: 'Legal',
+          value: 1,
+          color: '#B39A91',
+          dataLabels: {
+            style: {
+              color: 'white'
+            }
+          }
+        },
+        {
+          id: 'dataGovernance-semantic',
+          parent: 'dataGovernance',
+          name: 'Semântica',
+          value: 1,
+          color: '#B39A91',
+          dataLabels: {
+            style: {
+              color: 'white'
+            }
+          }
+        },
+        {
+          id: 'dataGovernance-technical-architecture',
+          parent: 'dataGovernance-technical',
+          name: 'Arquitetura',
+          value: 1,
+          color: '#9B7E52',
+          dataLabels: {
+            style: {
+              color: 'white'
+            }
+          }
+        },
+        {
+          id: 'dataGovernance-technical-publication',
+          parent: 'dataGovernance-technical',
+          name: 'Publicação',
+          value: 1,
+          color: '#F5E490',
+          dataLabels: {
+            style: {
+              color: 'white'
+            }
+          }
+        },
+        {
+          id: 'dataGovernance-business-planning',
+          parent: 'dataGovernance-business',
+          name: 'Planejamento<br>do Negócio',
+          value: 1,
+          color: '#9B7E52',
+          dataLabels: {
+            style: {
+              color: 'white'
+            }
+          }
+        },
+        {
+          id: 'dataGovernance-business-non-assessed',
+          parent: 'dataGovernance-business',
+          name: 'non assessed',
+          color: '#F5E490',
+          value: 1,
+          dataLabels: {
+            style: {
+              color: 'white'
+            }
+          }
+        }
+      ];
+
+      // Configuração do gráfico Sunburst
+      Highcharts.chart('container', {
+        chart: {
+          type: 'sunburst',
+          height: '50%'
+        },
+        exporting: {
+          enabled: true, // Habilita o botão de exportação
+          chartOptions: {
+            chart: {
+              height: 1000,
+              width: 1000
+            }
+          }
+        },
+        series: [
+          {
+            type: 'sunburst',
+            data: data,
+            allowDrillToNode: true,
+            cursor: 'pointer',
+            levels: [
+              {
+                level: 1,
+                levelIsConstant: false,
+                dataLabels: {
+                  style: {
+                    fontSize: '30px' // Tamanho da fonte
+                  }
+                }
+              },
+              {
+                level: 2,
+                colorByPoint: true,
+                dataLabels: {
+                  style: {
+                    fontSize: '20px' // Tamanho da fonte
+                  }
+                }
+              },
+              {
+                level: 3,
+                colorVariation: {
+                  key: 'brightness',
+                  to: -0.5
+                },
+                dataLabels: {
+                  style: {
+                    fontSize: '20px' // Tamanho da fonte
+                  }
+                }
+              },
+              {
+                level: 4,
+                colorVariation: {
+                  key: 'brightness',
+                  to: 0.5
+                },
+                dataLabels: {
+                  style: {
+                    fontSize: '17px' // Tamanho da fonte
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        title: {
+          text: ''
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
